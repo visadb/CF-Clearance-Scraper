@@ -508,7 +508,13 @@ async def main() -> None:
             logging.error(err)
             return
 
+        seconds_to_wait_for_page_load = 6
+        logging.info(f"Sleeping for {seconds_to_wait_for_page_load} seconds to wait for page load...")
+        await asyncio.sleep(seconds_to_wait_for_page_load)
+        logging.info(f"Sleeping done, fetching cookies")
+
         all_cookies = await solver.get_cookies()
+        logging.info(f"Cookies fetched, extracting clearance cookie")
         clearance_cookie = solver.extract_clearance_cookie(all_cookies)
 
         if clearance_cookie is None:
